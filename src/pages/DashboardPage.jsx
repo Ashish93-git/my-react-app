@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./DashboardPage.css"; // ✅ Import CSS
+import "./DashboardPage.css"; 
 
 const DashboardPage = () => {
   const navigate = useNavigate();

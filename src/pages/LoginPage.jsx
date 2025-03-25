@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./LoginPage.css"; // ✅ Import CSS for styling
+import "./LoginPage.css"; 
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -14,26 +14,28 @@ const LoginPage = () => {
     }
   
     try {
-      const response = await axios.post("http://localhost:5000/api/login", credentials, {
+      console.log("🚀 Sending API Request:", JSON.stringify(credentials));
+  
+      const response = await axios.post("http://127.0.0.1:5000/api/login", credentials, {
         headers: { "Content-Type": "application/json" }
       });
   
-      console.log("Login Response:", response.data); // ✅ Debugging Log
+      console.log("Login Response:", response.data);
   
       if (response.data && response.data.token) {
         localStorage.setItem("token", response.data.token);
-        console.log("Token Saved:", localStorage.getItem("token")); // ✅ Confirm token is saved
+        console.log("Token Saved in Local Storage:", localStorage.getItem("token"));
         navigate("/dashboard");
       } else {
-        alert("Login failed. No token received.");
+        alert("Invalid login credentials (No token received).");
       }
   
     } catch (error) {
-      alert("Invalid login credentials");
       console.error("Login Error:", error.response ? error.response.data : error.message);
+      alert("Invalid login credentials");
     }
   };
-
+  
   
   return (
     <div className="login-container">
